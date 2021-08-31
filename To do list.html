@@ -1,0 +1,69 @@
+<html>
+
+<head>
+    <title>
+        To-do list simples
+    </title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js">
+    </script>
+</head>
+<style>
+    th {
+        width: 50%;
+        padding-left: 15%;
+        border: 1px solid black;
+        text-align: center;
+    }
+
+    input[type="text"]::placeholder {
+        text-align: center;
+    }
+</style>
+
+<body>
+    <h1 style="text-align: center;">To-do List</h1>
+    <div id="caralho" style="text-align: center; align-items:center;">
+        <table id="tabela" style="border: 1px solid black;   margin-left: auto;
+            margin-right: auto;">
+            <tr>
+                <th><input type="text" id="valor" placeholder="Nome da atividade"></input> <button
+                        onclick="aidicionarElemento();" id="adicionar" style="float: right;">Adicionar</button></th>
+            </tr>
+
+        </table>
+
+    </div>
+    <script>
+        $(window).on('load', function () {
+            $a = '<style>th {width: 50%;padding-left: 15%;border: 1px solid black;text-align: center;}input[type="text"]::placeholder {text-align: center} input[type="text"]::placeholder {text-align: center;}</style>' +
+                '<div id="caralho" style="text-align: center; align-items:center;">' + localStorage.getItem('Cofre') + '</div>'
+            $('#caralho').replaceWith($a);
+            console.log(localStorage.getItem('Cofre'));
+        });
+
+        function aidicionarElemento() {
+            if ($("#valor").val() != '') {
+                $('#tabela tr:last').after('<tr><th>' + $("#valor").val() + '<button onclick="apagarElemento();" id="BotaoApagar" style="float: right;">Apagar</button></th></tr>');
+                localStorage.setItem('Cofre', $('#caralho').html());
+            }
+            else {
+                alert("Atividade sem nome!")
+            }
+        };
+        function apagarElemento() {
+            $("#tabela").on("click", "#BotaoApagar", function () {
+                $(this).closest("tr").remove();
+                localStorage.setItem('Cofre', $('#caralho').html());
+            })
+        };
+    </script>
+
+
+
+
+
+
+</body>
+
+</html>
